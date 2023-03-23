@@ -4,5 +4,45 @@
   tasks:
 
   - name: install apache2 package
+    tags: this,that,another,something,justthing 
     apt:
       name: chokobo
+    when: ansible_distribution == "Ubuntu"
+  
+- hosts: another_servers
+  tasks:
+
+  - name: install another package
+    package:
+      name: 
+        - " {{ some_package }}"
+        - " {{another_package}} " 
+      update_cache: yes
+
+  - name: manage services in a particular server
+    service:
+      name: service_name
+      state: started
+      enabled: yes
+    when ansible_distribution == "Ubuntu"
+
+  
+  - name: understand lineinfile module
+    lineinfile:
+      path: /pathtofile
+      regexp: "^SystemAdmin"
+      line: this is the line which will come as an option to the selected line
+    when: ansible_distribution == "Ubuntu"
+    register: any_variable_name
+
+  - name: some other stuff
+      some_other_module:
+      do somethinghere
+    register: any_variable_name
+
+
+  - name: restart the httpd service
+    service:
+      name: httpd
+      state: restarted
+    when: any_variable_name.changed
