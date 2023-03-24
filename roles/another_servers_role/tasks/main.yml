@@ -51,3 +51,12 @@
       owner: root
       group: root
       mode: 0600
+
+  - name: use of template
+    template:
+      src: template_name
+      dest: path_to_dest
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart_sshd
