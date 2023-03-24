@@ -1,0 +1,5 @@
+- name: install apache2 package
+   tags: this,that,another,something,justthing 
+   apt:
+     name: chokobo
+   when: ansible_distribution == "Ubuntu"

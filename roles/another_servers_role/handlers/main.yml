@@ -1,0 +1,4 @@
+- name: handler_name
+  service:
+    name: some_service
+    state: restarted

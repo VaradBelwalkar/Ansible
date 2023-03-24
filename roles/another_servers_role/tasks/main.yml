@@ -1,0 +1,53 @@
+  - name: install another package
+    package:
+      name: 
+        - " {{ some_package }} " 
+        - " {{another_package}} " 
+      update_cache: yes
+
+  - name: manage services in a particular server
+    service:
+      name: " {{ some_service }} "
+      state: started
+      enabled: yes
+    when ansible_distribution == "Ubuntu"
+
+  
+  - name: understand lineinfile module
+    lineinfile:
+      path: /pathtofile
+      regexp: "^SystemAdmin"
+      line: this is the line which will come as an option to the selected line
+    when: ansible_distribution == "Ubuntu"
+    notify: handler_name
+
+  - name: some other stuff
+      some_other_module:
+      do somethinghere
+    register: any_variable_name
+
+
+  - name: restart the httpd service
+    service:
+      name: httpd
+      state: restarted
+    when: any_variable_name.changed
+  
+  - name: understand user module
+    user:
+      name: someuser
+      groups: wheel
+    when: some_condition_here
+  
+  - name: copy pubkey to the authorized_keys file in specified servers
+    authorized_key:
+      user: someuser
+      key: "fsdkjflksjdlkfLKJSDFLKJLSDKJ34534FKDL23lJFlkj334FlwkwjLKJFDLKJDSF ansible"
+
+  - name: add sudoers file for someuser
+    copy: 
+      src: somefile
+      dest: /var/somedest
+      owner: root
+      group: root
+      mode: 0600

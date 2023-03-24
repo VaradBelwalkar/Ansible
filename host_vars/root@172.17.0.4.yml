@@ -1,0 +1,5 @@
+var_name: var_value
+package_name: apache2
+service_name: apache2
+template_var: openssh-server
+
